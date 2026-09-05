@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
 async function connectDB() {
-  const connectionString = process.env.connectionString;
+  const uri = process.env.connectionString;
+
+  if (!uri) {
+    console.error('connectionString is not set in the environment. Check your .env file.');
+    process.exit(1);
+  }
 
   try {
-    await mongoose.connect(connectionString);
+    await mongoose.connect(uri);
     console.log('MongoDB connected');
   } catch (err) {
     console.error('MongoDB connection failed:', err.message);
