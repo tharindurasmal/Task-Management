@@ -4,9 +4,15 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 async function seedAdmin() {
-  const name = process.env.ADMIN_NAME || 'Admin';
-  const email = (process.env.ADMIN_EMAIL || 'admin@rasmal.com').toLowerCase();
-  const password = process.env.ADMIN_PASSWORD || '12345678';
+
+  const name = process.env.ADMIN_NAME;
+  const email = process.env.ADMIN_EMAIL?.toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+
+  if (!email || !password) {
+    console.error('Error: ADMIN_EMAIL and ADMIN_PASSWORD must be defined in your .env file.');
+    process.exit(1);
+  }
 
   await mongoose.connect(process.env.connectionString);
 

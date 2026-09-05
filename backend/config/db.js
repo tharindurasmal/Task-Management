@@ -4,7 +4,7 @@ async function connectDB() {
   const uri = process.env.connectionString;
 
   if (!uri) {
-    console.error('connectionString is not set in the environment. Check your .env file.');
+    console.error('connectionString is not set.');
     process.exit(1);
   }
 
