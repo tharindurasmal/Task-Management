@@ -2,11 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/authContext';
 import ProtectedRoute from './components/protectedRoute';
 import AdminRoute from './components/adminRoute';
-//import Navbar from './components/Navbar';
 import Login from './pages/login';
-//import Register from './pages/Register';
-//import Board from './pages/Board';
-//import AdminDashboard from './pages/AdminDashboard';
 import './index.css';
 
 function AppRoutes() {
