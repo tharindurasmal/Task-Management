@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/authContext';
 import ProtectedRoute from './components/protectedRoute';
 import AdminRoute from './components/adminRoute';
 import Login from './pages/login';
+import Register from './pages/register';
 import './index.css';
 
 function AppRoutes() {
