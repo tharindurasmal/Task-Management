@@ -17,6 +17,7 @@ function toPublicUser(user) {
     name: user.name,
     email: user.email,
     role: user.role,
+    isApproved: user.isApproved,
     createdAt: user.createdAt,
   };
 }
@@ -24,6 +25,9 @@ function toPublicUser(user) {
 // POST /api/auth/register
 // Public self-registration always creates a normal 'user' — role is never
 // taken from the request body, so nobody can register themselves as admin.
+// The account starts UNAPPROVED (isApproved: false via the schema default)
+// and cannot log in until an admin approves it. No token is issued here —
+// registering does not log you in.
 const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -42,8 +46,10 @@ const register = asyncHandler(async (req, res) => {
   const hashed = await bcrypt.hash(password, 10);
   const user = await User.create({ name, email, password: hashed, role: 'user' });
 
-  const token = signToken(user);
-  res.status(201).json({ token, user: toPublicUser(user) });
+  res.status(201).json({
+    message: 'Registration successful. An admin needs to approve your account before you can log in.',
+    user: toPublicUser(user),
+  });
 });
 
 // POST /api/auth/login
@@ -63,6 +69,13 @@ const login = asyncHandler(async (req, res) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
     return res.status(401).json({ error: 'Invalid credentials' });
+  }
+
+  // Admins are always allowed in. Normal users must be approved first.
+  if (user.role !== 'admin' && !user.isApproved) {
+    return res.status(403).json({
+      error: 'Your account is pending admin approval. Please check back later.',
+    });
   }
 
   const token = signToken(user);

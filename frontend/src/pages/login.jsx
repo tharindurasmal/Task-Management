@@ -20,7 +20,11 @@ export default function Login() {
         <h1>Log in</h1>
         <p className="auth-subtitle">Access your task board</p>
 
-        {error && <div className="auth-error">{error}</div>}
+        {error && (
+          <div className={error.toLowerCase().includes('pending') ? 'auth-pending' : 'auth-error'}>
+            {error}
+          </div>
+        )}
 
         <label htmlFor="email">Email</label>
         <input

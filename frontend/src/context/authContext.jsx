@@ -17,16 +17,18 @@ export function AuthProvider({ children }) {
     setUser(user);
   };
 
+  // Registration no longer logs the user in — the backend requires admin
+  // approval first. Returns the server's message so the UI can show it.
   const register = useCallback(async (name, email, password) => {
     setLoading(true);
     setError('');
     try {
       const { data } = await api.post('/auth/register', { name, email, password });
-      persist(data.token, data.user);
-      return true;
+      return { success: true, message: data.message };
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed');
-      return false;
+      const message = err.response?.data?.error || 'Registration failed';
+      setError(message);
+      return { success: false, message };
     } finally {
       setLoading(false);
     }

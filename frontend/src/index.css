@@ -419,3 +419,4 @@ body {
     align-items: flex-start;
   }
 }
+.auth-pending { background: #fbf1e6; color: var(--warn); padding: 10px 12px; border-radius: var(--radius); font-size: 0.85rem; margin-bottom: 8px; }

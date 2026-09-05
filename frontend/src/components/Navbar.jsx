@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <Link to="/board" className="navbar-brand">
-        LessTaxi Tasks
+        Task Board
       </Link>
       {user && (
         <nav className="navbar-links">
