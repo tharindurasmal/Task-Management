@@ -96,7 +96,7 @@ A Postman collection covering every endpoint (including the role-based access co
 
 | | URL |
 |---|---|
-| Live frontend | [_Vercel URL ](https://task-management-six-tawny.vercel.app/) |
+| Live frontend | [ Vercel URL ](https://task-management-six-tawny.vercel.app/) |
 | Live backend | [_Render URL_](https://task-management-zyqz.onrender.com) |
 | Backend health check | [`check`](https://task-management-zyqz.onrender.com/api/health) |
 
