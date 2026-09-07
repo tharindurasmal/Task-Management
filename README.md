@@ -96,8 +96,8 @@ A Postman collection covering every endpoint (including the role-based access co
 
 | | URL |
 |---|---|
-| Live frontend | [_add your Vercel URL here_](https://task-management-six-tawny.vercel.app/) |
-| Live backend | [_add your Render URL here_](https://task-management-zyqz.onrender.com) |
-| Backend health check | [`<your-render-url>/api/health`](https://task-management-zyqz.onrender.com/api/health) |
+| Live frontend | [_Vercel URL ](https://task-management-six-tawny.vercel.app/) |
+| Live backend | [_Render URL_](https://task-management-zyqz.onrender.com) |
+| Backend health check | [`check`](https://task-management-zyqz.onrender.com/api/health) |
 
 Hosted on Render (backend) and Vercel (frontend), with MongoDB Atlas as the database. Render's free tier sleeps after inactivity, so the first request after idle may take 20–30 seconds to respond.
