@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const { login, loading, error } = useAuth();
@@ -20,7 +20,11 @@ export default function Login() {
         <h1>Log in</h1>
         <p className="auth-subtitle">Access your task board</p>
 
-        {error && <div className="auth-error">{error}</div>}
+        {error && (
+          <div className={error.toLowerCase().includes('pending') ? 'auth-pending' : 'auth-error'}>
+            {error}
+          </div>
+        )}
 
         <label htmlFor="email">Email</label>
         <input

@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/authContext';
-import ProtectedRoute from './components/protectedRoute';
-import AdminRoute from './components/adminRoute';
-import Login from './pages/login';
-import Register from './pages/register';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
+import Navbar from './components/Navbar';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Board from './pages/Board';
+import AdminDashboard from './pages/AdminDashboard';
 import './index.css';
 
 function AppRoutes() {

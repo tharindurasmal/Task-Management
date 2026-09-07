@@ -23,6 +23,7 @@ async function seedAdmin() {
     existing.role = 'admin';
     existing.password = hashed;
     existing.name = name;
+    existing.isApproved = true;
     await existing.save();
     console.log(`Existing user ${email} updated to admin.`);
   } else {

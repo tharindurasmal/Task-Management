@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Register() {
   const { register, loading, error } = useAuth();
@@ -8,12 +8,29 @@ export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await register(name, email, password);
-    if (success) navigate('/board');
+    const result = await register(name, email, password);
+    if (result.success) {
+      setSuccessMessage(result.message);
+    }
   };
+
+  if (successMessage) {
+    return (
+      <div className="auth-page">
+        <div className="auth-card">
+          <h1>Account created</h1>
+          <p className="auth-subtitle">{successMessage}</p>
+          <button className="btn-primary" onClick={() => navigate('/login')}>
+            Go to login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="auth-page">
