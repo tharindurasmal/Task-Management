@@ -26,7 +26,7 @@ Users can register, get approved by an admin, create and claim tasks, and drag t
 
 ### Clone the repo
 ```bash
-git clone [<your-repo-url>](https://github.com/tharindurasmal/Task-Management.git)
+git clone https://github.com/tharindurasmal/Task-Management.git
 cd task-management
 ```
 
