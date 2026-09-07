@@ -1,0 +1,5 @@
+#Task Management
+
+## 1. Overview
+
+Users can register, get approved by an admin, create and claim tasks, and drag tasks between To Do / In Progress / Done columns. Admins get a dashboard to approve new users, delete, reassign tasks to any user, and delete tasks.
