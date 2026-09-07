@@ -101,3 +101,17 @@ A Postman collection covering every endpoint (including the role-based access co
 | Backend health check | [`check`](https://task-management-zyqz.onrender.com/api/health) |
 
 Hosted on Render (backend) and Vercel (frontend), with MongoDB Atlas as the database. Render's free tier sleeps after inactivity, so the first request after idle may take 20–30 seconds to respond.
+
+<img width="1360" height="731" alt="Image" src="https://github.com/user-attachments/assets/6f1da4fb-e3c9-4e3f-a308-063548ee58ec" />
+
+<img width="1360" height="727" alt="Image" src="https://github.com/user-attachments/assets/7372e51a-4524-488a-bf33-07eff59aa19e" />
+
+<img width="1360" height="729" alt="Image" src="https://github.com/user-attachments/assets/0fbc296b-3f58-4a67-801f-4024567a4a8a" />
+
+<img width="1360" height="727" alt="Image" src="https://github.com/user-attachments/assets/bed660f0-6642-45db-b578-64e310539b0b" />
+
+<img width="1360" height="728" alt="Image" src="https://github.com/user-attachments/assets/230accdf-8edb-4386-9833-2cf44cb46734" />
+
+<img width="1360" height="729" alt="Image" src="https://github.com/user-attachments/assets/815deca4-67fc-4bbc-9445-b02297778cea" />
+
+<img width="1360" height="723" alt="Image" src="https://github.com/user-attachments/assets/3bbf5678-52b5-4797-9ba9-e20de0fecf6a" />
