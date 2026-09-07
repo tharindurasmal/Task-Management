@@ -1,8 +1,8 @@
-#Task Management#
+# Task Management
 
 ## 1. Overview
 
-Users can register, get approved by an admin, create and claim tasks, and drag tasks between To Do / In Progress / Done columns. Admins get a dashboard to approve new users, delete, reassign tasks to any user, and delete tasks.
+Users can register, get approved by an admin, create and claim tasks, and drag tasks between To Do / In Progress / Done columns. Admins get a dashboard to approve new users, reassign tasks to any user, and delete tasks.
 
 ## 2. Tech Stack
 
@@ -34,11 +34,15 @@ cd task-management
 ```bash
 cd backend
 npm install
+npm run dev
+```
 
 ### Frontend
 ```bash
 cd frontend
 npm install
+npm run dev
+```
 
 ## 4. Environment Variables
 
@@ -96,5 +100,4 @@ A Postman collection covering every endpoint (including the role-based access co
 | Live backend | _add your Render URL here_ |
 | Backend health check | `<your-render-url>/api/health` |
 
-Hosted on Render (backend) and Vercel (frontend), with MongoDB Atlas as the database. Render's free tier.
-
+Hosted on Render (backend) and Vercel (frontend), with MongoDB Atlas as the database. Render's free tier sleeps after inactivity, so the first request after idle may take 20–30 seconds to respond.
