@@ -7,6 +7,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
   const [approvingId, setApprovingId] = useState(null);
+  const [deletingUserId, setDeletingUserId] = useState(null);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
@@ -53,6 +54,19 @@ export default function AdminDashboard() {
       setTasks((prev) => prev.filter((t) => t._id !== taskId));
     } catch (err) {
       setErrorMsg(err.response?.data?.error || 'Could not delete task');
+    }
+  };
+
+  const handleDeleteUser = async (userId, userName) => {
+    if (!window.confirm(`Delete ${userName}'s account? This cannot be undone.`)) return;
+    setDeletingUserId(userId);
+    try {
+      await api.delete(`/users/${userId}`);
+      setUsers((prev) => prev.filter((u) => u._id !== userId));
+    } catch (err) {
+      setErrorMsg(err.response?.data?.error || 'Could not delete user');
+    } finally {
+      setDeletingUserId(null);
     }
   };
 
@@ -158,6 +172,7 @@ export default function AdminDashboard() {
               <th>Role</th>
               <th>Status</th>
               <th>Joined</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -174,6 +189,17 @@ export default function AdminDashboard() {
                   </span>
                 </td>
                 <td>{new Date(u.createdAt).toLocaleDateString()}</td>
+                <td>
+                  {u.role !== 'admin' && (
+                    <button
+                      className="btn-delete-text"
+                      disabled={deletingUserId === u._id}
+                      onClick={() => handleDeleteUser(u._id, u.name)}
+                    >
+                      {deletingUserId === u._id ? 'Deleting…' : 'Delete'}
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

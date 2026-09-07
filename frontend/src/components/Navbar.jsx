@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { getInitials, getAvatarColor } from '../utils/avatar';
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, greeting, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -18,37 +18,35 @@ export default function Navbar() {
   const isAdmin = location.pathname === '/admin';
 
   return (
-    <>
-      <header className="topbar">
-        <span className="topbar-brand">Tasks Manger</span>
-        <nav className="topbar-nav">
-          <Link to="/board" className={`topbar-link ${isBoard ? 'topbar-link-active' : ''}`}>
-            Board
-          </Link>
-          {user.role === 'admin' && (
-            <Link to="/admin" className={`topbar-link ${isAdmin ? 'topbar-link-active' : ''}`}>
-              Admin
-            </Link>
-          )}
-        </nav>
-        <div className="topbar-spacer" />
-      </header>
+    <header className="topbar">
+      <span className="topbar-brand">Tasks Manger</span>
 
-      <div className="subbar">
-        <div className="subbar-left">
-          <h1>{isAdmin ? 'Admin Dashboard' : 'Task Board Role'}</h1>
-          <span className="role-pill">{user.role}</span>
+      <nav className="topbar-nav">
+        <Link to="/board" className={`topbar-link ${isBoard ? 'topbar-link-active' : ''}`}>
+          Board
+        </Link>
+        {user.role === 'admin' && (
+          <Link to="/admin" className={`topbar-link ${isAdmin ? 'topbar-link-active' : ''}`}>
+            Admin
+          </Link>
+        )}
+      </nav>
+
+      <div className="topbar-right">
+        {greeting && (
+          <span className="topbar-greeting">
+            Hello, {user.name}! {greeting}
+          </span>
+        )}
+        
+        <div className="avatar-circle" style={{ background: getAvatarColor(user.name) }}>
+          {getInitials(user.name)}
         </div>
-        <div className="subbar-right">
-          <div className="avatar-circle" style={{ background: getAvatarColor(user.name) }}>
-            {getInitials(user.name)}
-          </div>
-          <span className="subbar-name">{user.name}</span>
-          <button onClick={handleLogout} className="btn-ghost">
-            Log out
-          </button>
-        </div>
+        <span className="topbar-name">{user.name}</span>
+        <button onClick={handleLogout} className="btn-ghost">
+          Log out
+        </button>
       </div>
-    </>
+    </header>
   );
 }
