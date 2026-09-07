@@ -81,4 +81,17 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json({ user: toPublicUser(user) });
 });
 
-module.exports = { register, login, getMe };
+const getGreeting = asyncHandler(async (req, res) => {
+  const hour = new Date().getHours();
+  let greeting;
+  if (hour < 12) {
+    greeting = 'Good morning';
+  } else if (hour < 18) {
+    greeting = 'Good afternoon';
+  } else {
+    greeting = 'Good evening';
+  }
+  res.status(200).json({ greeting });
+});
+
+module.exports = { register, login, getMe, getGreeting };

@@ -105,6 +105,11 @@ export default function Board() {
 
   return (
     <div className="board-page">
+      <div className="page-title-row">
+        <h1>Task Board</h1>
+        
+      </div>
+
       <div className="toolbar">
         <input
           type="text"

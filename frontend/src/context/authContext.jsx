@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import api from '../api/axios';
 
 const AuthContext = createContext(null);
@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [greeting, setGreeting] = useState('');
 
   const persist = (token, user) => {
     localStorage.setItem('token', token);
@@ -17,8 +18,18 @@ export function AuthProvider({ children }) {
     setUser(user);
   };
 
-  // Registration no longer logs the user in — the backend requires admin
-  // approval first. Returns the server's message so the UI can show it.
+  // good morning / good afternoon / good evening 
+  const fetchGreeting = useCallback(async () => {
+    try {
+      const { data } = await api.get('/auth/greeting');
+      setGreeting(data.greeting);
+    } catch (err) {
+      
+      setGreeting('');
+    }
+  }, []);
+
+// Register a new user. show success message.
   const register = useCallback(async (name, email, password) => {
     setLoading(true);
     setError('');
@@ -40,6 +51,7 @@ export function AuthProvider({ children }) {
     try {
       const { data } = await api.post('/auth/login', { email, password });
       persist(data.token, data.user);
+      fetchGreeting();
       return true;
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
@@ -53,10 +65,17 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
+    setGreeting('');
+  }, []);
+
+ 
+  useEffect(() => {
+    if (user) fetchGreeting();
+ 
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, error, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, error, greeting, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

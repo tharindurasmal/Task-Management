@@ -23,12 +23,14 @@ body {
   color: var(--ink);
 }
 
-/* ---------- Top bar (bold blue) ---------- */
+/* ---------- Nav bar (single bold-blue bar: brand + nav + greeting + user) ---------- */
 .topbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 0 32px;
-  height: 56px;
+  gap: 16px;
+  padding: 12px 32px;
+  min-height: 56px;
   background: var(--brand);
   color: white;
 }
@@ -37,12 +39,12 @@ body {
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .topbar-nav {
   display: flex;
   gap: 8px;
-  margin: 0 auto;
 }
 
 .topbar-link {
@@ -64,30 +66,17 @@ body {
   font-weight: 500;
 }
 
-.topbar-spacer {
-  width: 130px;
-}
-
-/* ---------- Sub bar (title + user) ---------- */
-.subbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 32px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--line);
-}
-
-.subbar-left {
+.topbar-right {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto;
 }
 
-.subbar-left h1 {
-  font-size: 1.15rem;
-  margin: 0;
-  font-weight: 600;
+.topbar-greeting {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
 }
 
 .role-pill {
@@ -100,15 +89,16 @@ body {
   font-weight: 500;
 }
 
-.subbar-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Translucent variant for use inside the blue navbar itself, where a solid
+   brand-colored pill would blend into the background. */
+.role-pill-nav {
+  background: rgba(255, 255, 255, 0.18);
 }
 
-.subbar-name {
+.topbar-name {
   font-size: 0.88rem;
-  color: var(--ink-soft);
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
 }
 
 .btn-ghost {
@@ -124,6 +114,19 @@ body {
 .btn-ghost:hover {
   border-color: var(--ink-soft);
   color: var(--ink);
+}
+
+/* Logout button sits on the blue navbar, so it needs light-on-dark styling
+   instead of the default .btn-ghost (used elsewhere on white backgrounds). */
+.topbar-right .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.topbar-right .btn-ghost:hover {
+  border-color: white;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ---------- Avatars ---------- */
@@ -495,9 +498,25 @@ body {
   background: var(--brand-dark);
 }
 
+/* ---------- Page title (replaces the old white sub-bar) ---------- */
+.page-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.page-title-row h1 {
+  font-size: 1.15rem;
+  margin: 0;
+  font-weight: 600;
+}
+
 /* ---------- Admin ---------- */
 .admin-page h1 {
-  display: none;
+  font-size: 1.15rem;
+  margin: 0;
+  font-weight: 600;
 }
 
 .admin-section {
@@ -632,18 +651,13 @@ body {
     flex-direction: column;
   }
 
-  .subbar {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
   .topbar {
-    padding: 0 16px;
+    padding: 12px 16px;
   }
 
-  .topbar-spacer {
-    display: none;
+  .topbar-right {
+    margin-left: 0;
+    flex-wrap: wrap;
   }
 
   .app-main {

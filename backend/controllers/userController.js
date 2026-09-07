@@ -23,4 +23,24 @@ const approveUser = asyncHandler(async (req, res) => {
   res.status(200).json({ user });
 });
 
-module.exports = { getUsers, getPendingUsers, approveUser };
+const deleteUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (id === req.user.id) {
+    return res.status(400).json({ error: 'You cannot delete your own account' });
+  }
+
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  if (user.role === 'admin') {
+    return res.status(400).json({ error: 'Admin accounts cannot be deleted' });
+  }
+
+  await user.deleteOne();
+  res.status(200).json({ message: 'User deleted', id });
+});
+
+module.exports = { getUsers, getPendingUsers, approveUser, deleteUser };
