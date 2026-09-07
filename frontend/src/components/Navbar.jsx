@@ -20,7 +20,7 @@ export default function Navbar() {
   return (
     <>
       <header className="topbar">
-        <span className="topbar-brand">LessTaxi Tasks</span>
+        <span className="topbar-brand">Tasks Manger</span>
         <nav className="topbar-nav">
           <Link to="/board" className={`topbar-link ${isBoard ? 'topbar-link-active' : ''}`}>
             Board
@@ -36,7 +36,7 @@ export default function Navbar() {
 
       <div className="subbar">
         <div className="subbar-left">
-          <h1>{isAdmin ? 'Admin Dashboard' : 'Task Board'}</h1>
+          <h1>{isAdmin ? 'Admin Dashboard' : 'Task Board Role'}</h1>
           <span className="role-pill">{user.role}</span>
         </div>
         <div className="subbar-right">

@@ -7,5 +7,5 @@ const router = express.Router();
 router.get('/', authenticate, requireAdmin, getUsers);
 router.get('/pending', authenticate, requireAdmin, getPendingUsers);
 router.patch('/:id/approve', authenticate, requireAdmin, approveUser);
-
+router.delete('/:id', authenticate, requireAdmin, deleteUser);
 module.exports = router;
