@@ -46,10 +46,20 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDeleteTask = async (taskId) => {
+    if (!window.confirm('Delete this task? This cannot be undone.')) return;
+    try {
+      await api.delete(`/tasks/${taskId}`);
+      setTasks((prev) => prev.filter((t) => t._id !== taskId));
+    } catch (err) {
+      setErrorMsg(err.response?.data?.error || 'Could not delete task');
+    }
+  };
+
   if (loading) return <div className="board-loading">Loading admin dashboard…</div>;
 
-  const pendingUsers = users.filter((u) => u.role === 'user' && !u.isApproved);
-  const approvedUsers = users.filter((u) => u.role === 'admin' || u.isApproved);
+  const pendingUsers = users.filter((u) => u.role === 'user' && u.isApproved !== true);
+  const approvedUsers = users.filter((u) => u.role === 'admin' || u.isApproved === true);
 
   return (
     <div className="admin-page">
@@ -100,6 +110,7 @@ export default function AdminDashboard() {
               <th>Created By</th>
               <th>Assigned To</th>
               <th>Reassign</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -119,13 +130,17 @@ export default function AdminDashboard() {
                     <option value="" disabled>
                       Assign to…
                     </option>
-                    {/* Only approved users can be assigned tasks */}
                     {approvedUsers.map((u) => (
                       <option key={u._id} value={u._id}>
                         {u.name}
                       </option>
                     ))}
                   </select>
+                </td>
+                <td>
+                  <button className="btn-delete-text" onClick={() => handleDeleteTask(task._id)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

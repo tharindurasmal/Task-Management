@@ -69,6 +69,16 @@ export default function Board() {
     }
   };
 
+  const handleDelete = async (taskId) => {
+    if (!window.confirm('Delete this task? This cannot be undone.')) return;
+    try {
+      await api.delete(`/tasks/${taskId}`);
+      setTasks((prev) => prev.filter((t) => t._id !== taskId));
+    } catch (err) {
+      setErrorMsg(err.response?.data?.error || 'Could not delete this task');
+    }
+  };
+
   const handleDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
     if (!destination) return;
@@ -160,7 +170,9 @@ export default function Board() {
                         task={task}
                         index={index}
                         currentUserId={user.id}
+                        isAdmin={user.role === 'admin'}
                         onClaim={handleClaim}
+                        onDelete={handleDelete}
                       />
                     ))}
                     {provided.placeholder}

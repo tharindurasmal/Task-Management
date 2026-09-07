@@ -559,6 +559,50 @@ body {
   font-weight: 500;
 }
 
+.task-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.task-card-top .task-title {
+  flex: 1;
+}
+
+.task-delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  flex-shrink: 0;
+}
+
+.task-delete-btn:hover {
+  color: var(--danger);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-delete-text {
+  border: none;
+  background: none;
+  color: var(--danger);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.btn-delete-text:hover {
+  text-decoration: underline;
+}
 .status-todo {
   color: var(--ink-soft);
 }

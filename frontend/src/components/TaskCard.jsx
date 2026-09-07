@@ -5,7 +5,7 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
 
-export default function TaskCard({ task, index, currentUserId, onClaim }) {
+export default function TaskCard({ task, index, currentUserId, isAdmin, onClaim, onDelete }) {
   const isUnassigned = !task.assignedTo;
   const isMine = task.assignedTo?._id === currentUserId;
   const assigneeName = task.assignedTo?.name;
@@ -19,7 +19,20 @@ export default function TaskCard({ task, index, currentUserId, onClaim }) {
           {...provided.dragHandleProps}
           className={`task-card ${snapshot.isDragging ? 'task-card-dragging' : ''}`}
         >
-<p className={`task-title ${task.status === 'done' ? 'task-title-done' : ''}`}>{task.title}</p>
+          <div className="task-card-top">
+            <p className={`task-title ${task.status === 'done' ? 'task-title-done' : ''}`}>{task.title}</p>
+            {isAdmin && (
+              <button
+                className="task-delete-btn"
+                onClick={() => onDelete(task._id)}
+                aria-label="Delete task"
+                title="Delete task"
+              >
+                ×
+              </button>
+            )}
+          </div>
+
           <span className={`tag-pill ${isUnassigned ? 'tag-pill-open' : ''}`}>
             {isUnassigned ? 'Unassigned' : assigneeName}
           </span>
